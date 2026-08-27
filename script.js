@@ -50,12 +50,34 @@ let DATA = null;
 
 function persist() { saveData(DATA); }
 
+// Only ever produce http(s) links — keeps a pasted "javascript:" URL from
+// becoming a clickable script.
+function safeHref(raw) {
+  const text = (raw || "").trim();
+  if (!text) return null;
+  const withScheme = /^[a-z][a-z0-9+.-]*:/i.test(text) ? text : "https://" + text;
+  try {
+    const url = new URL(withScheme);
+    return url.protocol === "http:" || url.protocol === "https:" ? url.href : null;
+  } catch (e) {
+    return null;
+  }
+}
+
 function buildLinkCell(company, td) {
   td.contentEditable = "true";
-  if (company.link) {
-    td.innerHTML = `<a class="link" href="${company.link}" target="_blank" rel="noopener">${company.link.replace(/^https?:\/\//, "")}</a>`;
-  } else {
-    td.textContent = "";
+  td.textContent = "";
+  const href = safeHref(company.link);
+  if (href) {
+    const a = document.createElement("a");
+    a.className = "link";
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.textContent = company.link.replace(/^https?:\/\//, "");
+    td.appendChild(a);
+  } else if (company.link) {
+    td.textContent = company.link;
   }
   td.addEventListener("blur", () => {
     const text = td.innerText.trim();
@@ -70,13 +92,17 @@ function buildLinkCell(company, td) {
 function render() {
   const root = document.getElementById("categories");
   root.innerHTML = "";
-  DATA.categories.forEach((cat, catIdx) => {
+  DATA.categories.forEach(cat => {
     const section = document.createElement("section");
     section.className = "category";
 
     const head = document.createElement("div");
     head.className = "category-head";
-    head.innerHTML = `<h2>${cat.name}</h2><p>${cat.blurb || ""}</p>`;
+    const heading = document.createElement("h2");
+    heading.textContent = cat.name || "";
+    const blurb = document.createElement("p");
+    blurb.textContent = cat.blurb || "";
+    head.append(heading, blurb);
     section.appendChild(head);
 
     const scroll = document.createElement("div");

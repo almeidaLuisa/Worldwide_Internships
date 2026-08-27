@@ -178,4 +178,8 @@ a.link:hover{border-color:var(--accent);}
 }
 .remove-btn:hover{color:#b3413a;}
 
-footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:0.8rem;color:var(--ink-faint);}
+footer{margin-top:3.5rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:0.78rem;color:var(--ink-faint);}
+footer p{margin:0 0 0.7rem;max-width:78ch;line-height:1.6;}
+footer p:last-child{margin-bottom:0;}
+footer .colophon{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--ink-soft);}
+footer .colophon b{color:var(--ink);font-weight:500;}
