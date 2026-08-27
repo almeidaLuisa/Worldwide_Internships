@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Internship Search Tracker">
+  <rect width="64" height="64" rx="14.1" fill="#2f5233"/>
+  <g fill="none" stroke="#faf8f4" stroke-width="3.5">
+    <circle cx="32" cy="32" r="20.2"/>
+    <ellipse cx="32" cy="32" rx="9.3" ry="20.2"/>
+    <line x1="11.8" y1="32" x2="52.2" y2="32"/>
+  </g>
+</svg>
