@@ -2,7 +2,6 @@
 
 A small static site for tracking Summer 2027 computer engineering internships outside the US. Companies are grouped into categories (Big Tech / Multinationals, Enterprise Software & Hardware in Europe, Consumer Tech & Fintech in Europe, Canada, Latin America), each row is editable in the browser, and your edits persist locally via `localStorage`.
 
-No build step, no backend — just `index.html`, `style.css`, `script.js`, and `companies.json`.
 
 ## Run it locally
 
