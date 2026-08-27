@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: internship-tracker
+    runtime: static
+    staticPublishPath: .
+    buildCommand: ""
+    pullRequestPreviewsEnabled: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
