@@ -428,6 +428,213 @@
       ]
     },
     {
+      "name": "Trading Firms — FPGA / Low-Latency Hardware",
+      "blurb": "Proprietary trading and market-making firms with dedicated FPGA/hardware teams building low-latency trading systems — this is where CpE skills (digital design, HDL, hardware-software co-design) map most directly onto the job. Non-US offices listed; most run separate hardware-engineering intern tracks from their general SWE ones, so search postings specifically for 'FPGA' or 'hardware engineer.'",
+      "companies": [
+        {
+          "company": "Akuna Capital",
+          "region": "Asia-Pacific",
+          "office": "Sydney (AU) — also Shanghai",
+          "program": "FPGA / Hardware Engineering Internship",
+          "euRequired": "no",
+          "visa": "check posting",
+          "link": "https://www.akunacapital.com/careers",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "The one you flagged — Sydney office runs FPGA-focused roles distinct from the Chicago HQ."
+        },
+        {
+          "company": "Optiver",
+          "region": "Europe / Asia-Pacific",
+          "office": "Amsterdam (NL) — also Sydney",
+          "program": "FPGA Engineer Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://optiver.com/working-at-optiver/career-opportunities/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Headquartered in Amsterdam; well-known dedicated FPGA/hardware team, not just software."
+        },
+        {
+          "company": "IMC Trading",
+          "region": "Europe / Asia-Pacific",
+          "office": "Amsterdam (NL) — also Sydney",
+          "program": "Hardware / FPGA Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://careers.imc.com/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": ""
+        },
+        {
+          "company": "XTX Markets",
+          "region": "Europe",
+          "office": "London (UK)",
+          "program": "Hardware Engineering Internship",
+          "euRequired": "no",
+          "visa": "check posting",
+          "link": "https://www.xtxmarkets.com/careers/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "London-headquartered, heavy investment in custom low-latency hardware."
+        },
+        {
+          "company": "Flow Traders",
+          "region": "Europe",
+          "office": "Amsterdam (NL)",
+          "program": "Internship Program",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.flowtraders.com/careers",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": ""
+        },
+        {
+          "company": "Susquehanna (SIG)",
+          "region": "Europe / Asia-Pacific",
+          "office": "Dublin (IE) / Hong Kong",
+          "program": "Technology Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://careers.sig.com/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Dublin office is a major tech/hardware hub for SIG, separate from Philadelphia HQ."
+        },
+        {
+          "company": "Jump Trading",
+          "region": "Europe / Asia-Pacific",
+          "office": "London (UK) / Singapore",
+          "program": "Internship Program",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.jumptrading.com/careers/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": ""
+        },
+        {
+          "company": "Tower Research Capital",
+          "region": "Europe / Asia-Pacific",
+          "office": "London (UK) / Singapore",
+          "program": "Internship Program",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.tower-research.com/careers",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": ""
+        },
+        {
+          "company": "Hudson River Trading (HRT)",
+          "region": "Europe / Asia-Pacific",
+          "office": "London (UK) / Singapore",
+          "program": "Internship Program",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.hudsonrivertrading.com/careers/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": ""
+        },
+        {
+          "company": "G-Research",
+          "region": "Europe",
+          "office": "London (UK)",
+          "program": "Internship Program",
+          "euRequired": "no",
+          "visa": "check posting",
+          "link": "https://www.gresearch.com/careers/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Strong low-latency systems/FPGA work, London-headquartered."
+        }
+      ]
+    },
+    {
+      "name": "Semiconductor & Hardware Manufacturers",
+      "blurb": "Chip and embedded-hardware companies (beyond the ones already listed under Big Tech / Multinationals) with dedicated digital design, FPGA, and embedded-systems intern tracks.",
+      "companies": [
+        {
+          "company": "Analog Devices",
+          "region": "Europe",
+          "office": "Limerick (IE)",
+          "program": "Internship Program",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.analog.com/en/about-adi/careers.html",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Major analog/mixed-signal chip design site."
+        },
+        {
+          "company": "Infineon Technologies",
+          "region": "Europe",
+          "office": "Germany / Austria (Villach)",
+          "program": "Internship Program",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.infineon.com/cms/en/careers/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Power semiconductors, automotive chips."
+        },
+        {
+          "company": "STMicroelectronics",
+          "region": "Europe",
+          "office": "Geneva (CH) / Italy / France",
+          "program": "Internship Program",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.st.com/content/st_com/en/about/st_careers.html",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Has offices in Italy — worth checking if Italian citizenship applies."
+        },
+        {
+          "company": "NXP Semiconductors",
+          "region": "Europe",
+          "office": "Eindhoven (NL)",
+          "program": "Internship Program",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.nxp.com/company/about-nxp/careers:CAREERS",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Embedded processors, automotive/IoT chips."
+        },
+        {
+          "company": "Nordic Semiconductor",
+          "region": "Europe",
+          "office": "Norway",
+          "program": "Internship Program",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.nordicsemi.com/About-us/Careers",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Wireless/IoT chips, smaller intern cohort."
+        }
+      ]
+    },
+    {
       "name": "Latin America",
       "blurb": "Home-market and regional options — no citizenship/visa barrier given Brazilian citizenship, and strong engineering brands.",
       "companies": [
