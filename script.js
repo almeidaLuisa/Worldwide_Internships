@@ -283,33 +283,61 @@ function render() {
       removeTd.appendChild(removeBtn);
       tr.appendChild(removeTd);
 
+      // Enter commits the cell instead of dropping a newline into it.
+      tr.querySelectorAll('[contenteditable="true"]').forEach(cell => {
+        cell.addEventListener("keydown", e => {
+          if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); cell.blur(); }
+        });
+      });
+
       tbody.appendChild(tr);
     });
 
     table.appendChild(tbody);
     scroll.appendChild(table);
     section.appendChild(scroll);
+
+    const addBtn = document.createElement("button");
+    addBtn.className = "add-company";
+    addBtn.textContent = "+ Add company";
+    addBtn.title = "Add a blank row to " + (cat.name || "this category");
+    addBtn.addEventListener("click", () => addCompanyTo(cat, id));
+    section.appendChild(addBtn);
+
     root.appendChild(section);
   });
 
   renderNav(navEntries);
+  applyPendingFocus();
 }
 
-function addRow() {
-  if (!DATA.categories.length) return;
-  const catName = prompt(
-    "Which category?\n" + DATA.categories.map((c,i) => `${i+1}. ${c.name}`).join("\n"),
-    "1"
-  );
-  const idx = parseInt(catName, 10) - 1;
-  const cat = DATA.categories[idx] || DATA.categories[0];
-  cat.companies.push({
-    company: "New company", region: "", office: "", program: "",
+function blankCompany() {
+  return {
+    company: "", region: "", office: "", program: "",
     euRequired: "check", visa: "", link: "", appsOpen: "", deadline: "",
     status: "not started", notes: ""
-  });
+  };
+}
+
+// Set just before a re-render to put the cursor in a specific new row.
+let FOCUS_AFTER_RENDER = null;
+
+function addCompanyTo(cat, sectionId) {
+  cat.companies.push(blankCompany());
+  FOCUS_AFTER_RENDER = sectionId;
   persist();
   render();
+}
+
+function applyPendingFocus() {
+  if (!FOCUS_AFTER_RENDER) return;
+  const section = document.getElementById(FOCUS_AFTER_RENDER);
+  FOCUS_AFTER_RENDER = null;
+  if (!section) return;
+  const cell = section.querySelector("tbody tr:last-child td.company");
+  if (!cell) return;
+  cell.scrollIntoView({ block: "center", behavior: "smooth" });
+  cell.focus();
 }
 
 function exportCSV() {
@@ -338,8 +366,6 @@ async function init() {
     ind.textContent = "+" + MERGED_COUNT + " new from the list";
     ind.style.opacity = "1";
   }
-
-  document.getElementById("add-row").addEventListener("click", addRow);
   document.getElementById("export-csv").addEventListener("click", exportCSV);
   document.getElementById("reset-data").addEventListener("click", async () => {
     if (!confirm("Reset all data to the original defaults? This discards your edits.")) return;
