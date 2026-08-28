@@ -1,6 +1,6 @@
 # Internship Search Tracker
 
-A small static site for tracking Summer 2027 computer engineering internships outside the US. Companies are grouped into categories (Big Tech / Multinationals, Enterprise Software & Hardware in Europe, Consumer Tech & Fintech in Europe, Canada, Latin America), each row is editable in the browser, and your edits persist locally via `localStorage`.
+A small static site for tracking Summer 2027 computer engineering internships outside the US. Companies are grouped into categories (Big Tech / Multinationals, Enterprise Software & Hardware (Europe), Consumer Tech & Fintech (Europe), Canada, Trading Firms — FPGA / Low-Latency Hardware, FPGA, EDA & Reconfigurable Computing, Semiconductor & Hardware Manufacturers, Latin America, Startups & Scale-ups), each row is editable in the browser, and your edits persist locally via `localStorage`.
 
 No build step, no backend — just `index.html`, `style.css`, `script.js`, `companies.json`, and a `fonts/` folder of self-hosted webfonts.
 
