@@ -1,13 +1,61 @@
 const STORAGE_KEY = "intern-tracker-data-v1";
 const COLS = ["office","program","euRequired","visa","link","appsOpen","deadline","status","notes"];
 
-async function loadData() {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    try { return JSON.parse(saved); } catch (e) { /* fall through */ }
-  }
-  const res = await fetch("companies.json");
+function keyOf(catName, companyName) { return catName + "::" + companyName; }
+
+async function fetchSeed() {
+  const res = await fetch("companies.json", { cache: "no-cache" });
+  if (!res.ok) throw new Error("seed fetch failed: " + res.status);
   return res.json();
+}
+
+// Fold new categories/companies from companies.json into the browser's saved
+// copy without touching rows the user has already edited. Rows the user deleted
+// are remembered in `deleted` so they don't come back on the next load.
+function mergeSeed(saved, seed) {
+  const gone = new Set(saved.deleted || []);
+  const byName = new Map(saved.categories.map(c => [c.name, c]));
+  let added = 0;
+
+  seed.categories.forEach(seedCat => {
+    const fresh = seedCat.companies.filter(x => !gone.has(keyOf(seedCat.name, x.company)));
+    const existing = byName.get(seedCat.name);
+
+    if (!existing) {
+      saved.categories.push(Object.assign({}, seedCat, { companies: fresh }));
+      added += fresh.length;
+      return;
+    }
+
+    const have = new Set(existing.companies.map(x => x.company));
+    fresh.forEach(x => {
+      if (have.has(x.company)) return;
+      existing.companies.push(Object.assign({}, x));
+      added++;
+    });
+    if (!existing.blurb && seedCat.blurb) existing.blurb = seedCat.blurb;
+  });
+
+  return added;
+}
+
+let MERGED_COUNT = 0;
+
+async function loadData() {
+  let saved = null;
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (raw) {
+    try { saved = JSON.parse(raw); } catch (e) { saved = null; }
+  }
+  if (!saved || !Array.isArray(saved.categories)) return fetchSeed();
+
+  try {
+    MERGED_COUNT = mergeSeed(saved, await fetchSeed());
+    if (MERGED_COUNT) saveData(saved);
+  } catch (e) {
+    // Offline or seed unavailable — carry on with the saved copy.
+  }
+  return saved;
 }
 
 function saveData(data) {
@@ -222,7 +270,13 @@ function render() {
       removeBtn.textContent = "✕";
       removeBtn.title = "Remove row";
       removeBtn.addEventListener("click", () => {
-        cat.companies.splice(compIdx, 1);
+        const removed = cat.companies.splice(compIdx, 1)[0];
+        if (removed) {
+          // Remember it, so the next merge from companies.json doesn't re-add it.
+          DATA.deleted = DATA.deleted || [];
+          const k = keyOf(cat.name, removed.company);
+          if (DATA.deleted.indexOf(k) === -1) DATA.deleted.push(k);
+        }
         persist();
         render();
       });
@@ -279,13 +333,18 @@ async function init() {
   DATA = await loadData();
   render();
 
+  if (MERGED_COUNT) {
+    const ind = document.getElementById("save-indicator");
+    ind.textContent = "+" + MERGED_COUNT + " new from the list";
+    ind.style.opacity = "1";
+  }
+
   document.getElementById("add-row").addEventListener("click", addRow);
   document.getElementById("export-csv").addEventListener("click", exportCSV);
   document.getElementById("reset-data").addEventListener("click", async () => {
     if (!confirm("Reset all data to the original defaults? This discards your edits.")) return;
     localStorage.removeItem(STORAGE_KEY);
-    const res = await fetch("companies.json");
-    DATA = await res.json();
+    DATA = await fetchSeed();   // clears the deleted-row list along with everything else
     render();
     persist();
   });

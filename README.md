@@ -45,6 +45,10 @@ Open the folder in VS Code (`code .`), edit `companies.json` to add/update compa
 
 `companies.json` holds the seed data. Once you start editing in the browser, your changes live in that browser's `localStorage`, not in the JSON file — so they won't show up for someone else visiting the deployed URL, and clearing site data will wipe them. To make an edit "official" for everyone (including future-you on a different device), edit `companies.json` directly and push.
 
+On every load the page also merges `companies.json` into your saved copy: **new** categories and companies are appended, while rows you already have are left exactly as you edited them. So adding companies to the JSON and pushing makes them appear for you without a reset and without losing any statuses or notes. The save indicator reads `+N new from the list` when this happens. Rows you delete are recorded in a `deleted` list so a later merge doesn't bring them back; "Reset to defaults" clears that list along with everything else.
+
+The merge matches on category name plus company name. If you rename a company cell that came from the seed, the merge treats the original as missing and re-adds it — rename in `companies.json` instead, or delete the row rather than blanking it.
+
 Every EU-citizenship note, visa policy, and deadline in the seed data is a placeholder — verify all of it directly on each company's careers page.
 
 ## Privacy, fonts, and licensing
