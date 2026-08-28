@@ -89,12 +89,46 @@ function buildLinkCell(company, td) {
   });
 }
 
+function slugify(name) {
+  return (name || "")
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "") || "category";
+}
+
+// Jump links across the top. Rebuilt with the table so added/removed rows keep
+// their counts honest.
+function renderNav(entries) {
+  const nav = document.getElementById("cat-nav");
+  nav.innerHTML = "";
+  entries.forEach(({ id, name, count }) => {
+    const a = document.createElement("a");
+    a.className = "cat-nav-link";
+    a.href = "#" + id;
+    a.textContent = name;
+    const n = document.createElement("span");
+    n.className = "cat-nav-count";
+    n.textContent = count;
+    a.appendChild(n);
+    nav.appendChild(a);
+  });
+}
+
 function render() {
   const root = document.getElementById("categories");
   root.innerHTML = "";
+  const navEntries = [];
+  const usedIds = new Set();
   DATA.categories.forEach(cat => {
     const section = document.createElement("section");
     section.className = "category";
+
+    let id = slugify(cat.name);
+    while (usedIds.has(id)) id += "-x";
+    usedIds.add(id);
+    section.id = id;
+    navEntries.push({ id, name: cat.name || "Untitled", count: cat.companies.length });
 
     const head = document.createElement("div");
     head.className = "category-head";
@@ -203,6 +237,8 @@ function render() {
     section.appendChild(scroll);
     root.appendChild(section);
   });
+
+  renderNav(navEntries);
 }
 
 function addRow() {
