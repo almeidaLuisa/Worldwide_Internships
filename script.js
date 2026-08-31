@@ -12,7 +12,36 @@ async function fetchSeed() {
 // Fold new categories/companies from companies.json into the browser's saved
 // copy without touching rows the user has already edited. Rows the user deleted
 // are remembered in `deleted` so they don't come back on the next load.
+// When a category is retired into another one, move the user's saved rows across
+// rather than dropping them, then remove the old category. Their edits ride along
+// on the row objects; rows already present in the target win.
+function applyCategoryMerges(saved, merges) {
+  if (!merges) return 0;
+  let moved = 0;
+  Object.keys(merges).forEach(fromName => {
+    const from = saved.categories.find(c => c.name === fromName);
+    if (!from) return;
+    const toName = merges[fromName];
+    let to = saved.categories.find(c => c.name === toName);
+    if (!to) {
+      from.name = toName;   // target absent: just rename in place
+      return;
+    }
+    const have = new Set(to.companies.map(x => x.company));
+    from.companies.forEach(x => {
+      if (have.has(x.company)) return;
+      to.companies.push(x);
+      have.add(x.company);
+      moved++;
+    });
+    saved.categories = saved.categories.filter(c => c !== from);
+  });
+  return moved;
+}
+
 function mergeSeed(saved, seed) {
+  const moved = applyCategoryMerges(saved, seed.categoryMerges);
+
   const gone = new Set(saved.deleted || []);
   const byName = new Map(saved.categories.map(c => [c.name, c]));
   let added = 0;
@@ -33,10 +62,19 @@ function mergeSeed(saved, seed) {
       existing.companies.push(Object.assign({}, x));
       added++;
     });
-    if (!existing.blurb && seedCat.blurb) existing.blurb = seedCat.blurb;
+    // Blurbs aren't user-editable, so always take the seed's current wording.
+    if (seedCat.blurb) existing.blurb = seedCat.blurb;
   });
 
-  return added;
+  // Follow the seed's ordering; anything not in the seed keeps its place at the end.
+  const order = new Map(seed.categories.map((c, i) => [c.name, i]));
+  saved.categories.sort((a, b) => {
+    const ai = order.has(a.name) ? order.get(a.name) : Number.MAX_SAFE_INTEGER;
+    const bi = order.has(b.name) ? order.get(b.name) : Number.MAX_SAFE_INTEGER;
+    return ai - bi;
+  });
+
+  return { added: added, moved: moved };
 }
 
 let MERGED_COUNT = 0;
@@ -50,8 +88,9 @@ async function loadData() {
   if (!saved || !Array.isArray(saved.categories)) return fetchSeed();
 
   try {
-    MERGED_COUNT = mergeSeed(saved, await fetchSeed());
-    if (MERGED_COUNT) saveData(saved);
+    const result = mergeSeed(saved, await fetchSeed());
+    MERGED_COUNT = result.added;
+    if (result.added || result.moved) saveData(saved);
   } catch (e) {
     // Offline or seed unavailable — carry on with the saved copy.
   }
@@ -137,6 +176,53 @@ function buildLinkCell(company, td) {
   });
 }
 
+// Which sections are minimized. Kept in its own key so it stays out of the
+// company data (and so it survives a Reset to defaults).
+const COLLAPSE_KEY = "intern-tracker-collapsed-v1";
+
+function loadCollapsed() {
+  try {
+    const raw = localStorage.getItem(COLLAPSE_KEY);
+    return new Set(raw ? JSON.parse(raw) : []);
+  } catch (e) {
+    return new Set();
+  }
+}
+
+function saveCollapsed(set) {
+  try { localStorage.setItem(COLLAPSE_KEY, JSON.stringify([...set])); } catch (e) { /* private mode */ }
+}
+
+let COLLAPSED = loadCollapsed();
+
+function applyCollapsed(section, isCollapsed) {
+  section.classList.toggle("collapsed", isCollapsed);
+  const btn = section.querySelector(".collapse-btn");
+  if (btn) {
+    btn.setAttribute("aria-expanded", String(!isCollapsed));
+    btn.textContent = isCollapsed ? "+" : "−";
+    btn.title = (isCollapsed ? "Expand " : "Minimize ") + (section.dataset.catName || "section");
+  }
+}
+
+function setAllCollapsed(collapse) {
+  COLLAPSED = new Set();
+  if (collapse) DATA.categories.forEach(c => COLLAPSED.add(c.name));
+  saveCollapsed(COLLAPSED);
+  document.querySelectorAll(".category").forEach(section => {
+    applyCollapsed(section, collapse);
+  });
+  syncCollapseAllButton();
+}
+
+function syncCollapseAllButton() {
+  const btn = document.getElementById("collapse-all");
+  if (!btn) return;
+  const allCollapsed = DATA.categories.length > 0 && DATA.categories.every(c => COLLAPSED.has(c.name));
+  btn.textContent = allCollapsed ? "Expand all" : "Collapse all";
+  btn.dataset.mode = allCollapsed ? "expand" : "collapse";
+}
+
 function slugify(name) {
   return (name || "")
     .toLowerCase()
@@ -155,6 +241,14 @@ function renderNav(entries) {
     a.className = "cat-nav-link";
     a.href = "#" + id;
     a.textContent = name;
+    // Jumping to a minimized section should open it, or you land on nothing.
+    a.addEventListener("click", () => {
+      if (!COLLAPSED.delete(name)) return;
+      saveCollapsed(COLLAPSED);
+      const section = document.getElementById(id);
+      if (section) applyCollapsed(section, false);
+      syncCollapseAllButton();
+    });
     const n = document.createElement("span");
     n.className = "cat-nav-count";
     n.textContent = count;
@@ -178,14 +272,42 @@ function render() {
     section.id = id;
     navEntries.push({ id, name: cat.name || "Untitled", count: cat.companies.length });
 
+    section.dataset.catName = cat.name || "";
+
     const head = document.createElement("div");
     head.className = "category-head";
+
+    const titleRow = document.createElement("div");
+    titleRow.className = "category-title";
+
+    const collapseBtn = document.createElement("button");
+    collapseBtn.className = "collapse-btn";
+    collapseBtn.setAttribute("aria-controls", id);
+
     const heading = document.createElement("h2");
     heading.textContent = cat.name || "";
+
+    const count = document.createElement("span");
+    count.className = "category-count";
+    count.textContent = cat.companies.length;
+
+    titleRow.append(collapseBtn, heading, count);
+
     const blurb = document.createElement("p");
     blurb.textContent = cat.blurb || "";
-    head.append(heading, blurb);
+    head.append(titleRow, blurb);
     section.appendChild(head);
+
+    const toggle = () => {
+      const nowCollapsed = !COLLAPSED.has(cat.name);
+      if (nowCollapsed) COLLAPSED.add(cat.name); else COLLAPSED.delete(cat.name);
+      saveCollapsed(COLLAPSED);
+      applyCollapsed(section, nowCollapsed);
+      syncCollapseAllButton();
+    };
+    collapseBtn.addEventListener("click", toggle);
+    // The whole title row is a target, so it's an easy click on a phone too.
+    titleRow.addEventListener("click", e => { if (e.target !== collapseBtn) toggle(); });
 
     const scroll = document.createElement("div");
     scroll.className = "table-scroll";
@@ -304,10 +426,12 @@ function render() {
     addBtn.addEventListener("click", () => addCompanyTo(cat, id));
     section.appendChild(addBtn);
 
+    applyCollapsed(section, COLLAPSED.has(cat.name));
     root.appendChild(section);
   });
 
   renderNav(navEntries);
+  syncCollapseAllButton();
   applyPendingFocus();
 }
 
@@ -324,6 +448,8 @@ let FOCUS_AFTER_RENDER = null;
 
 function addCompanyTo(cat, sectionId) {
   cat.companies.push(blankCompany());
+  // No point focusing a row inside a minimized section.
+  if (COLLAPSED.delete(cat.name)) saveCollapsed(COLLAPSED);
   FOCUS_AFTER_RENDER = sectionId;
   persist();
   render();
@@ -366,6 +492,10 @@ async function init() {
     ind.textContent = "+" + MERGED_COUNT + " new from the list";
     ind.style.opacity = "1";
   }
+  syncCollapseAllButton();
+  document.getElementById("collapse-all").addEventListener("click", e => {
+    setAllCollapsed(e.currentTarget.dataset.mode === "collapse");
+  });
   document.getElementById("export-csv").addEventListener("click", exportCSV);
   document.getElementById("reset-data").addEventListener("click", async () => {
     if (!confirm("Reset all data to the original defaults? This discards your edits.")) return;

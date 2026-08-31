@@ -810,8 +810,209 @@
       ]
     },
     {
+      "name": "Germany",
+      "blurb": "Your Italian citizenship means full right to work here with no permit and no sponsorship question — which makes Germany the single most accessible market on this list. Two local conventions to know: internships are a Praktikum (often 3–6 months, longer than a US summer) or a Werkstudent role during term, and a Pflichtpraktikum required by your degree is treated differently from a voluntary one on pay and paperwork, so say which you are doing when you apply. Many postings are in German even when the working language is English. Companies listed in other categories — SAP, Bosch, Infineon, Siemens EDA, Rohde & Schwarz — also hire in Germany; these are the ones not listed elsewhere.",
+      "companies": [
+        {
+          "company": "Siemens AG",
+          "region": "Europe",
+          "office": "Munich / Erlangen (DE)",
+          "program": "Praktikum / Werkstudent",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://www.siemens.com/global/en/company/jobs.html",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Industrial automation and embedded control at enormous scale; distinct from the Siemens EDA entry in the FPGA category."
+        },
+        {
+          "company": "Airbus",
+          "region": "Europe",
+          "office": "Hamburg / Bremen / Manching (DE)",
+          "program": "Internship / Praktikum",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://www.airbus.com/en/careers",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Avionics is the CpE draw — certified embedded and FPGA design. Some defence-adjacent roles carry nationality restrictions, which EU citizenship helps with."
+        },
+        {
+          "company": "Continental",
+          "region": "Europe",
+          "office": "Hanover / Regensburg (DE)",
+          "program": "Praktikum / Werkstudent",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://www.continental.com/en/career/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Automotive electronics and ECUs; heavy embedded and hardware-software integration."
+        },
+        {
+          "company": "CARIAD",
+          "region": "Europe",
+          "office": "Wolfsburg / Berlin / Ingolstadt (DE)",
+          "program": "Internship / Werkstudent",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://cariad.technology/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Volkswagen Group's software arm, building the in-car stack; younger and more software-shaped than the rest of German automotive."
+        },
+        {
+          "company": "ZEISS",
+          "region": "Europe",
+          "office": "Oberkochen / Jena (DE)",
+          "program": "Praktikum / Thesis",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://www.zeiss.com/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Semiconductor lithography optics — the optical half of what makes ASML machines work."
+        },
+        {
+          "company": "TRUMPF",
+          "region": "Europe",
+          "office": "Ditzingen (DE)",
+          "program": "Praktikum / Werkstudent",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://www.trumpf.com/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Industrial lasers and EUV light sources for chipmaking; strong controls and real-time systems work."
+        },
+        {
+          "company": "GlobalFoundries (Dresden)",
+          "region": "Europe",
+          "office": "Dresden (DE)",
+          "program": "Internship / Praktikum",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://gf.com/careers/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Europe's largest semiconductor fab. Process and test engineering rather than chip design, but real silicon."
+        },
+        {
+          "company": "X-FAB",
+          "region": "Europe",
+          "office": "Erfurt / Dresden (DE)",
+          "program": "Praktikum",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://www.xfab.com/career",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Specialty foundry for analog and mixed-signal; smaller, so postings are sporadic."
+        },
+        {
+          "company": "Elmos Semiconductor",
+          "region": "Europe",
+          "office": "Dortmund (DE)",
+          "program": "Praktikum / Werkstudent",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://www.elmos.com/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Automotive mixed-signal ICs; small enough that an intern sees a whole project."
+        },
+        {
+          "company": "Fraunhofer-Gesellschaft",
+          "region": "Europe",
+          "office": "Erlangen (IIS) / Berlin (HHI) / Dresden (DE)",
+          "program": "Studentische Hilfskraft / Thesis",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://www.fraunhofer.de/en/jobs-and-career.html",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Europe's largest applied-research organisation; IIS invented MP3 and does heavy FPGA and signal-processing work. Placements often run as thesis or student-assistant roles rather than fixed internships."
+        },
+        {
+          "company": "DLR (German Aerospace Center)",
+          "region": "Europe",
+          "office": "Cologne / Oberpfaffenhofen (DE)",
+          "program": "Internship / Thesis",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://www.dlr.de/en/careers",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Space and aeronautics research; onboard-computer and FPGA work sits alongside the science."
+        },
+        {
+          "company": "Celonis",
+          "region": "Europe",
+          "office": "Munich (DE)",
+          "program": "Internship / Werkstudent",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://www.celonis.com/careers/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Process-mining unicorn and Munich's biggest software success; English-speaking environment."
+        },
+        {
+          "company": "Trade Republic",
+          "region": "Europe",
+          "office": "Berlin (DE)",
+          "program": "Internship / Werkstudent",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://traderepublic.com/careers",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Brokerage app scaling fast across Europe; backend and infrastructure heavy."
+        },
+        {
+          "company": "Delivery Hero",
+          "region": "Europe",
+          "office": "Berlin (DE)",
+          "program": "Internship / Werkstudent",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://careers.deliveryhero.com/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Large Berlin engineering org, English-speaking, used to international hires."
+        },
+        {
+          "company": "HelloFresh",
+          "region": "Europe",
+          "office": "Berlin (DE)",
+          "program": "Internship / Werkstudent",
+          "euRequired": "no",
+          "visa": "not needed (EU citizen)",
+          "link": "https://www.hellofresh.com/careers/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Berlin scale-up with a sizable data and platform engineering team."
+        }
+      ]
+    },
+    {
       "name": "Latin America",
-      "blurb": "Home-market and regional options — no citizenship/visa barrier given Brazilian citizenship, and strong engineering brands.",
+      "blurb": "Home-market and regional options — no citizenship or visa barrier given Brazilian citizenship, and strong engineering brands. Two catches specific to Brazil: the southern summer runs December–February, so a local programa de verao falls during your US spring semester rather than your break, and estagio under Lei 11.788 needs a termo de compromisso signed by your enrolling school — ask UF CpE advising whether they will issue one before investing in applications. Rio and Sao Paulo entries are marked in the office column.",
       "companies": [
         {
           "company": "Nubank",
@@ -890,13 +1091,7 @@
           "deadline": "",
           "status": "not started",
           "notes": ""
-        }
-      ]
-    },
-    {
-      "name": "Brazil — Rio & Sao Paulo",
-      "blurb": "Your citizenship makes work authorization a non-issue here, but the calendar and the paperwork are the catch. Brazilian summer is December–February, so a local \"programa de verao\" runs during your US spring semester, not your break. Ordinary estagios are year-round and part-time rather than 10-week cohorts, and Lei 11.788 requires a termo de compromisso signed with your enrolling institution — the real obstacle is getting UF to sign one, so ask the CpE advising office before you invest in applications. For a June–August window, ask directly about a fixed-term project or a remote arrangement.",
-      "companies": [
+        },
         {
           "company": "Itau Unibanco",
           "region": "Latin America",
@@ -1121,6 +1316,181 @@
       ]
     },
     {
+      "name": "Singapore",
+      "blurb": "Outside your original target regions, and the one place on this list where neither passport helps: you would need a Training Employment Pass or a Work Holiday Pass, both employer- or scheme-dependent. Work Holiday Pass eligibility keys off both nationality and your university, so check whether studying at a US school qualifies you before building a plan around it. What makes it worth the trouble is density — Singapore is the biggest semiconductor and hardware hub in Asia outside Taiwan, so the FPGA and silicon roles here are real. Big Tech firms already listed above also staff large Singapore offices.",
+      "companies": [
+        {
+          "company": "Grab",
+          "region": "Asia",
+          "office": "Singapore",
+          "program": "Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://grab.careers/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Southeast Asia's largest tech company; big, well-run internship program that hires regionally."
+        },
+        {
+          "company": "Sea Group (Shopee / Garena)",
+          "region": "Asia",
+          "office": "Singapore",
+          "program": "Internship / Graduate Program",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://career.sea.com/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "E-commerce and gaming at enormous scale; Shopee and Garena hire engineers separately."
+        },
+        {
+          "company": "DBS Bank",
+          "region": "Asia",
+          "office": "Singapore",
+          "program": "Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.dbs.com/careers/default.page",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Runs one of the largest in-house bank engineering orgs in Asia."
+        },
+        {
+          "company": "Micron",
+          "region": "Asia",
+          "office": "Singapore",
+          "program": "Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.micron.com/careers",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Memory fabs and test operations; one of the largest semiconductor employers on the island."
+        },
+        {
+          "company": "GlobalFoundries (Singapore)",
+          "region": "Asia",
+          "office": "Singapore",
+          "program": "Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://gf.com/careers/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Major fab cluster; same company as the Dresden entry, different site and hiring process."
+        },
+        {
+          "company": "Marvell",
+          "region": "Asia",
+          "office": "Singapore",
+          "program": "Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.marvell.com/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Runs a genuine chip-design centre here, not just sales — closest thing to RTL work in this section. Site blocks bots; open in a browser."
+        },
+        {
+          "company": "Broadcom",
+          "region": "Asia",
+          "office": "Singapore",
+          "program": "Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.broadcom.com/company/careers",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Long-standing Singapore engineering presence from the Avago heritage."
+        },
+        {
+          "company": "A*STAR — Institute of Microelectronics",
+          "region": "Asia",
+          "office": "Singapore",
+          "program": "Student Attachment / Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.a-star.edu.sg/ime",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Government research institute doing IC and microelectronics design; the most research-flavoured option here and the best FPGA fit."
+        },
+        {
+          "company": "Keysight Technologies",
+          "region": "Asia",
+          "office": "Singapore",
+          "program": "Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.keysight.com/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Test and measurement instruments; signal-processing and FPGA content similar to Rohde & Schwarz."
+        },
+        {
+          "company": "Applied Materials",
+          "region": "Asia",
+          "office": "Singapore",
+          "program": "Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.appliedmaterials.com/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Semiconductor equipment; controls and systems engineering. Site blocks bots; open in a browser."
+        },
+        {
+          "company": "Razer",
+          "region": "Asia",
+          "office": "Singapore",
+          "program": "Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.razer.com/",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Consumer hardware headquartered here — embedded firmware and peripheral design."
+        },
+        {
+          "company": "Nium",
+          "region": "Asia",
+          "office": "Singapore",
+          "program": "Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://www.nium.com/careers",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Cross-border payments infrastructure; smaller and more startup-shaped."
+        },
+        {
+          "company": "Coda Payments",
+          "region": "Asia",
+          "office": "Singapore",
+          "program": "Internship",
+          "euRequired": "check",
+          "visa": "check posting",
+          "link": "https://coda.co/careers",
+          "appsOpen": "",
+          "deadline": "",
+          "status": "not started",
+          "notes": "Payments for digital content and games; English-first workplace."
+        }
+      ]
+    },
+    {
       "name": "Startups & Scale-ups",
       "blurb": "Smaller companies where an intern touches real hardware or ships real features. Trade-offs to expect: hiring happens much later and far less predictably than at big firms, often only a few months ahead; programs are informal or unadvertised; and visa sponsorship is rarer — so a direct, well-timed email to an engineer or founder often beats a portal. The deep-tech entries here overlap heavily with the FPGA list.",
       "companies": [
@@ -1308,5 +1678,8 @@
         }
       ]
     }
-  ]
+  ],
+  "categoryMerges": {
+    "Brazil — Rio & Sao Paulo": "Latin America"
+  }
 }

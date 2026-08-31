@@ -133,12 +133,55 @@ h1{
 
 .category{margin-top:2.6rem;scroll-margin-top:1rem;}
 .category-head{margin-bottom:0.6rem;}
+.category-title{
+  display:flex;
+  align-items:baseline;
+  gap:0.55rem;
+  cursor:pointer;
+  user-select:none;
+}
 .category-head h2{
   font-family:'Fraunces',serif;
   font-weight:600;
   font-size:1.25rem;
   margin:0 0 0.3rem;
 }
+.collapse-btn{
+  flex:0 0 auto;
+  align-self:center;
+  width:1.5rem;
+  height:1.5rem;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.95rem;
+  border-radius:6px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--ink-soft);
+  cursor:pointer;
+  padding:0;
+}
+.category-title:hover .collapse-btn{border-color:var(--accent);color:var(--accent);}
+.category-count{
+  align-self:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.66rem;
+  padding:0.1rem 0.4rem;
+  border-radius:999px;
+  background:var(--accent-soft);
+  color:var(--accent);
+}
+
+/* Minimized: keep the heading row, hide everything under it. */
+.category.collapsed{margin-top:1rem;}
+.category.collapsed .category-head{margin-bottom:0;}
+.category.collapsed .category-head h2{margin-bottom:0;}
+.category.collapsed .category-head > p,
+.category.collapsed .table-scroll,
+.category.collapsed .add-company{display:none;}
 .category-head p{
   color:var(--ink-faint);
   font-size:0.85rem;

@@ -1,6 +1,6 @@
 # Internship Search Tracker
 
-A small static site for tracking Summer 2027 computer engineering internships outside the US. Companies are grouped into categories (Big Tech / Multinationals, Enterprise Software & Hardware (Europe), Consumer Tech & Fintech (Europe), Canada, Trading Firms — FPGA / Low-Latency Hardware, FPGA, EDA & Reconfigurable Computing, Semiconductor & Hardware Manufacturers, Latin America, Brazil — Rio & Sao Paulo, Startups & Scale-ups), Consumer Tech & Fintech (Europe), Canada, Trading Firms — FPGA / Low-Latency Hardware, FPGA, EDA & Reconfigurable Computing, Semiconductor & Hardware Manufacturers, Latin America, Startups & Scale-ups), each row is editable in the browser, and your edits persist locally via `localStorage`.
+A small static site for tracking Summer 2027 computer engineering internships outside the US. Companies are grouped into categories (Big Tech / Multinationals, Enterprise Software & Hardware (Europe), Consumer Tech & Fintech (Europe), Canada, Trading Firms — FPGA / Low-Latency Hardware, FPGA, EDA & Reconfigurable Computing, Semiconductor & Hardware Manufacturers, Germany, Latin America, Singapore, Startups & Scale-ups), Consumer Tech & Fintech (Europe), Canada, Trading Firms — FPGA / Low-Latency Hardware, FPGA, EDA & Reconfigurable Computing, Semiconductor & Hardware Manufacturers, Latin America, Brazil — Rio & Sao Paulo, Startups & Scale-ups), Consumer Tech & Fintech (Europe), Canada, Trading Firms — FPGA / Low-Latency Hardware, FPGA, EDA & Reconfigurable Computing, Semiconductor & Hardware Manufacturers, Latin America, Startups & Scale-ups), each row is editable in the browser, and your edits persist locally via `localStorage`.
 
 No build step, no backend — just `index.html`, `style.css`, `script.js`, `companies.json`, and a `fonts/` folder of self-hosted webfonts.
 
@@ -41,11 +41,17 @@ Every push to `main` auto-redeploys.
 
 Open the folder in VS Code (`code .`), edit `companies.json` to add/update companies, or edit `script.js`/`style.css` for behavior/design changes. Commit and push — Render picks up the change automatically.
 
+## Using the page
+
+Each category header has a minimize button (or click the title row) to collapse that section; **Collapse all** in the toolbar folds every section down to its heading so you can see the whole shape of the list at once. What is collapsed is remembered per browser in its own storage key, separate from the company data, and jumping to a category from the top nav opens it automatically.
+
 ## Notes on the data
 
 `companies.json` holds the seed data. Once you start editing in the browser, your changes live in that browser's `localStorage`, not in the JSON file — so they won't show up for someone else visiting the deployed URL, and clearing site data will wipe them. To make an edit "official" for everyone (including future-you on a different device), edit `companies.json` directly and push.
 
 On every load the page also merges `companies.json` into your saved copy: **new** categories and companies are appended, while rows you already have are left exactly as you edited them. So adding companies to the JSON and pushing makes them appear for you without a reset and without losing any statuses or notes. The save indicator reads `+N new from the list` when this happens. Rows you delete are recorded in a `deleted` list so a later merge doesn't bring them back; "Reset to defaults" clears that list along with everything else.
+
+To retire a category into another one, add a top-level `categoryMerges` map to `companies.json` (e.g. `{"Old Name": "New Name"}`). On the next load each browser moves its saved rows — edits and all — into the target category and drops the old one, so nobody ends up with both. Category order also follows the seed.
 
 The merge matches on category name plus company name. If you rename a company cell that came from the seed, the merge treats the original as missing and re-adds it — rename in `companies.json` instead, or delete the row rather than blanking it.
 
