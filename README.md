@@ -59,7 +59,8 @@ Every EU-citizenship note, visa policy, and deadline in the seed data is a place
 
 ## Privacy, fonts, and licensing
 
-- **Nothing is collected.** No accounts, no backend, no analytics, no cookies, no third-party scripts. Your edits live in your own browser's `localStorage` and never leave your device.
+- **Nothing is collected by default.** No accounts, no backend, no cookies. Your edits live in your own browser's `localStorage` and never leave your device.
+- **Optional visitor counts.** `index.html` ends with a GoatCounter snippet that is inert until you replace `YOURCODE` with your site code from [goatcounter.com](https://www.goatcounter.com/signup). Until then no third-party request is made and the footer states there is no tracking; filling it in both enables counting and rewrites that footer line to say what is collected. GoatCounter sets no cookies and stores no personal data, so no consent banner is needed — but keep the footer honest if you ever swap it for something that does.
 - **Fonts are self-hosted.** Fraunces, Inter, and JetBrains Mono are served from `fonts/` rather than loaded from `fonts.gstatic.com`, so no visitor IP address is handed to Google — the practice a German court found to be a GDPR violation in 2022. To refresh them, re-download the WOFF2 files and regenerate `fonts/fonts.css`.
 - **Font licenses.** All three typefaces are SIL Open Font License 1.1; see `fonts/OFL.txt` and `fonts/ATTRIBUTION.txt`.
 - **Site license.** MIT (see `LICENSE`). Swap it if you'd rather not let others reuse the code.

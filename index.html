@@ -53,12 +53,40 @@
         you rely on it.
       </p>
       <p>
-        No accounts, no analytics, no cookies, no tracking. Anything you type stays in
-        your own browser's local storage on this device and is never sent anywhere.
+        No accounts and no cookies. Anything you type stays in your own browser's local
+        storage on this device and is never sent anywhere.
+        <span id="analytics-note">No analytics and no tracking of any kind.</span>
       </p>
     </footer>
   </div>
 
 <script src="script.js"></script>
+
+<!--
+  Visitor counts via GoatCounter: cookieless, no personal data, no cross-site
+  tracking. Put your site code below (the "yourcode" in yourcode.goatcounter.com,
+  from https://www.goatcounter.com/signup).
+
+  While this still reads YOURCODE nothing is loaded, no third-party request is
+  made, and the footer keeps saying there is no tracking. Filling it in turns
+  counting on AND updates the footer to say so.
+-->
+<script>
+  (function () {
+    var CODE = "YOURCODE";
+    var note = document.getElementById("analytics-note");
+    if (CODE === "YOURCODE") return;
+
+    if (note) {
+      note.textContent = "Anonymous page counts are collected with GoatCounter — " +
+        "no cookies, no personal data, and no tracking across other sites.";
+    }
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://gc.zgo.at/count.js";
+    s.setAttribute("data-goatcounter", "https://" + CODE + ".goatcounter.com/count");
+    document.head.appendChild(s);
+  })();
+</script>
 </body>
 </html>
