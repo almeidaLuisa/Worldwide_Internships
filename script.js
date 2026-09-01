@@ -66,8 +66,14 @@ function mergeSeed(saved, seed) {
     if (seedCat.blurb) existing.blurb = seedCat.blurb;
   });
 
-  // Follow the seed's ordering; anything not in the seed keeps its place at the end.
-  const order = new Map(seed.categories.map((c, i) => [c.name, i]));
+  // Follow the seed's ordering, unless the user has arranged the sections
+  // themselves — their arrangement wins, and anything new lands at the end.
+  const userOrder = loadOrder();
+  const order = new Map(
+    userOrder.length
+      ? userOrder.map((name, i) => [name, i])
+      : seed.categories.map((c, i) => [c.name, i])
+  );
   saved.categories.sort((a, b) => {
     const ai = order.has(a.name) ? order.get(a.name) : Number.MAX_SAFE_INTEGER;
     const bi = order.has(b.name) ? order.get(b.name) : Number.MAX_SAFE_INTEGER;
@@ -195,6 +201,39 @@ function saveCollapsed(set) {
 
 let COLLAPSED = loadCollapsed();
 
+// The user's own section order, by category name. Kept beside the collapse
+// state rather than in the company data.
+const ORDER_KEY = "intern-tracker-order-v1";
+
+function loadOrder() {
+  try {
+    const raw = localStorage.getItem(ORDER_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveOrder() {
+  try {
+    localStorage.setItem(ORDER_KEY, JSON.stringify(DATA.categories.map(c => c.name)));
+  } catch (e) { /* private mode */ }
+}
+
+// Set before a re-render to bring a just-moved section back into view.
+let SCROLL_TO_AFTER_RENDER = null;
+
+function moveCategory(cat, delta) {
+  const from = DATA.categories.indexOf(cat);
+  const to = from + delta;
+  if (from < 0 || to < 0 || to >= DATA.categories.length) return;
+  DATA.categories.splice(to, 0, DATA.categories.splice(from, 1)[0]);
+  saveOrder();
+  SCROLL_TO_AFTER_RENDER = slugify(cat.name);
+  render();
+}
+
 function applyCollapsed(section, isCollapsed) {
   section.classList.toggle("collapsed", isCollapsed);
   const btn = section.querySelector(".collapse-btn");
@@ -262,7 +301,7 @@ function render() {
   root.innerHTML = "";
   const navEntries = [];
   const usedIds = new Set();
-  DATA.categories.forEach(cat => {
+  DATA.categories.forEach((cat, catIndex) => {
     const section = document.createElement("section");
     section.className = "category";
 
@@ -291,7 +330,25 @@ function render() {
     count.className = "category-count";
     count.textContent = cat.companies.length;
 
-    titleRow.append(collapseBtn, heading, count);
+    const moveControls = document.createElement("span");
+    moveControls.className = "cat-move";
+
+    const upBtn = document.createElement("button");
+    upBtn.className = "move-btn";
+    upBtn.textContent = "▲";
+    upBtn.title = "Move up";
+    upBtn.disabled = catIndex === 0;
+    upBtn.addEventListener("click", () => moveCategory(cat, -1));
+
+    const downBtn = document.createElement("button");
+    downBtn.className = "move-btn";
+    downBtn.textContent = "▼";
+    downBtn.title = "Move down";
+    downBtn.disabled = catIndex === DATA.categories.length - 1;
+    downBtn.addEventListener("click", () => moveCategory(cat, 1));
+
+    moveControls.append(upBtn, downBtn);
+    titleRow.append(collapseBtn, heading, count, moveControls);
 
     const blurb = document.createElement("p");
     blurb.textContent = cat.blurb || "";
@@ -307,7 +364,7 @@ function render() {
     };
     collapseBtn.addEventListener("click", toggle);
     // The whole title row is a target, so it's an easy click on a phone too.
-    titleRow.addEventListener("click", e => { if (e.target !== collapseBtn) toggle(); });
+    titleRow.addEventListener("click", e => { if (!e.target.closest("button")) toggle(); });
 
     const scroll = document.createElement("div");
     scroll.className = "table-scroll";
@@ -433,6 +490,12 @@ function render() {
   renderNav(navEntries);
   syncCollapseAllButton();
   applyPendingFocus();
+
+  if (SCROLL_TO_AFTER_RENDER) {
+    const moved = document.getElementById(SCROLL_TO_AFTER_RENDER);
+    SCROLL_TO_AFTER_RENDER = null;
+    if (moved) moved.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
 }
 
 function blankCompany() {

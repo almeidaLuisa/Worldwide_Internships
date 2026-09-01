@@ -1,6 +1,6 @@
 # Internship Search Tracker
 
-A small static site for tracking Summer 2027 computer engineering internships outside the US. Companies are grouped into 11 categories — Big Tech / Multinationals; Enterprise Software & Hardware (Europe); Consumer Tech & Fintech (Europe); Canada; Trading Firms — FPGA / Low-Latency Hardware; FPGA, EDA & Reconfigurable Computing; Semiconductor & Hardware Manufacturers; Germany; Latin America; Singapore; Startups & Scale-ups — each row is editable in the browser, and your edits persist locally via `localStorage`.
+A small static site for tracking Summer 2027 computer engineering internships outside the US. Companies are grouped into 12 categories — Big Tech / Multinationals; Enterprise Software & Hardware (Europe); Consumer Tech & Fintech (Europe); Canada; Trading Firms — FPGA / Low-Latency Hardware; FPGA, EDA & Reconfigurable Computing; Semiconductor & Hardware Manufacturers; Germany; Estonia; Latin America; Singapore; Startups & Scale-ups — each row is editable in the browser, and your edits persist locally via `localStorage`.
 
 No build step, no backend — just `index.html`, `style.css`, `script.js`, `companies.json`, and a `fonts/` folder of self-hosted webfonts.
 
@@ -43,7 +43,7 @@ Open the folder in VS Code (`code .`), edit `companies.json` to add/update compa
 
 ## Using the page
 
-Each category header has a minimize button (or click the title row) to collapse that section; **Collapse all** in the toolbar folds every section down to its heading so you can see the whole shape of the list at once. What is collapsed is remembered per browser in its own storage key, separate from the company data, and jumping to a category from the top nav opens it automatically.
+Each category header has a minimize button (or click the title row) to collapse that section; **Collapse all** in the toolbar folds every section down to its heading so you can see the whole shape of the list at once. Hovering a section header also reveals up/down arrows to reorder it — handy for pushing the country sections to the top. Collapsed state and section order are each remembered per browser in their own storage keys, separate from the company data; once you set an order it takes precedence over the seed, and categories added later appear at the bottom. Jumping to a category from the top nav opens it automatically.
 
 ## Notes on the data
 

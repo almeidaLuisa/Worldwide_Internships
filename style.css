@@ -165,6 +165,35 @@ h1{
   padding:0;
 }
 .category-title:hover .collapse-btn{border-color:var(--accent);color:var(--accent);}
+.cat-move{
+  margin-left:auto;
+  align-self:center;
+  display:inline-flex;
+  gap:0.25rem;
+  opacity:0;
+  transition:opacity 0.15s ease;
+}
+.category-title:hover .cat-move,
+.cat-move:focus-within{opacity:1;}
+.move-btn{
+  width:1.4rem;
+  height:1.4rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:0.55rem;
+  line-height:1;
+  padding:0;
+  border-radius:5px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--ink-faint);
+  cursor:pointer;
+}
+.move-btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent);}
+.move-btn:disabled{opacity:0.3;cursor:default;}
+/* Touch devices have no hover, so keep the controls visible there. */
+@media (hover:none){.cat-move{opacity:1;}}
 .category-count{
   align-self:center;
   font-family:'JetBrains Mono',monospace;
