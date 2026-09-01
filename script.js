@@ -39,8 +39,24 @@ function applyCategoryMerges(saved, merges) {
   return moved;
 }
 
+// Rows withdrawn from the seed, listed as "Category::Company". The merge only
+// ever adds, so pulling a row out of companies.json is not enough on its own —
+// browsers that already saved it need to be told to drop it.
+function applyRetirements(saved, retired) {
+  if (!Array.isArray(retired) || !retired.length) return 0;
+  const kill = new Set(retired);
+  let removed = 0;
+  saved.categories.forEach(cat => {
+    const before = cat.companies.length;
+    cat.companies = cat.companies.filter(x => !kill.has(keyOf(cat.name, x.company)));
+    removed += before - cat.companies.length;
+  });
+  return removed;
+}
+
 function mergeSeed(saved, seed) {
   const moved = applyCategoryMerges(saved, seed.categoryMerges);
+  const removed = applyRetirements(saved, seed.retiredCompanies);
 
   const gone = new Set(saved.deleted || []);
   const byName = new Map(saved.categories.map(c => [c.name, c]));
@@ -80,7 +96,7 @@ function mergeSeed(saved, seed) {
     return ai - bi;
   });
 
-  return { added: added, moved: moved };
+  return { added: added, moved: moved, removed: removed };
 }
 
 let MERGED_COUNT = 0;
@@ -96,7 +112,7 @@ async function loadData() {
   try {
     const result = mergeSeed(saved, await fetchSeed());
     MERGED_COUNT = result.added;
-    if (result.added || result.moved) saveData(saved);
+    if (result.added || result.moved || result.removed) saveData(saved);
   } catch (e) {
     // Offline or seed unavailable — carry on with the saved copy.
   }

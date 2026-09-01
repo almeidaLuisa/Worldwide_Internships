@@ -53,6 +53,8 @@ On every load the page also merges `companies.json` into your saved copy: **new*
 
 To retire a category into another one, add a top-level `categoryMerges` map to `companies.json` (e.g. `{"Old Name": "New Name"}`). On the next load each browser moves its saved rows — edits and all — into the target category and drops the old one, so nobody ends up with both. Category order also follows the seed.
 
+To withdraw a company, remove it from its category **and** add its `"Category::Company"` key to a top-level `retiredCompanies` array — deleting it from the seed alone leaves it sitting in every browser that already saved it.
+
 The merge matches on category name plus company name. If you rename a company cell that came from the seed, the merge treats the original as missing and re-adds it — rename in `companies.json` instead, or delete the row rather than blanking it.
 
 Every EU-citizenship note, visa policy, and deadline in the seed data is a placeholder — verify all of it directly on each company's careers page.

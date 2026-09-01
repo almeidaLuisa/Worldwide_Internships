@@ -203,7 +203,7 @@
           "appsOpen": "",
           "deadline": "",
           "status": "not started",
-          "notes": "Embedded/control systems, aerospace hardware."
+          "notes": "Embedded and control systems for civil aero engines. Rolls-Royce also has a defence business, so check the division on any posting."
         }
       ]
     },
@@ -829,7 +829,7 @@
         {
           "company": "Airbus",
           "region": "Europe",
-          "office": "Hamburg / Bremen / Manching (DE)",
+          "office": "Hamburg / Bremen (DE)",
           "program": "Internship / Praktikum",
           "euRequired": "no",
           "visa": "not needed (EU citizen)",
@@ -837,7 +837,7 @@
           "appsOpen": "",
           "deadline": "",
           "status": "not started",
-          "notes": "Avionics is the CpE draw — certified embedded and FPGA design. Some defence-adjacent roles carry nationality restrictions, which EU citizenship helps with."
+          "notes": "Avionics is the CpE draw — certified embedded and FPGA design on commercial aircraft. Apply to the civil aviation sites; Airbus also has a defence and space arm, so check which division a posting sits in."
         },
         {
           "company": "Continental",
@@ -1090,20 +1090,7 @@
           "appsOpen": "",
           "deadline": "",
           "status": "not started",
-          "notes": "Research-heavy: built X-Road, plus applied cryptography, secure hardware, and maritime surveillance. One of the strongest CpE fits here."
-        },
-        {
-          "company": "Milrem Robotics",
-          "region": "Europe",
-          "office": "Tallinn (EE)",
-          "program": "Internship",
-          "euRequired": "no",
-          "visa": "not needed (EU citizen)",
-          "link": "https://milremrobotics.com/careers/",
-          "appsOpen": "",
-          "deadline": "",
-          "status": "not started",
-          "notes": "Unmanned ground vehicles — real embedded, control, and autonomy work. Defence sector, so expect background checks and possible nationality restrictions; EU citizenship helps."
+          "notes": "Research-heavy: built X-Road, plus applied cryptography and secure hardware. One of the strongest CpE fits here. It also has a defence-facing strand, so confirm which team a role sits in."
         },
         {
           "company": "Starship Technologies",
@@ -1538,7 +1525,7 @@
           "appsOpen": "",
           "deadline": "",
           "status": "not started",
-          "notes": "Avionics is the standout CpE fit here — certified embedded and FPGA design under DO-254. An hour from Sao Paulo city, not in it."
+          "notes": "Avionics is the standout CpE fit here — certified embedded and FPGA design under DO-254. Commercial and executive aviation are the civil lines; Embraer also has a defence arm, so check the division. An hour from Sao Paulo city, not in it."
         }
       ]
     },
@@ -1908,5 +1895,8 @@
   ],
   "categoryMerges": {
     "Brazil — Rio & Sao Paulo": "Latin America"
-  }
+  },
+  "retiredCompanies": [
+    "Estonia::Milrem Robotics"
+  ]
 }
